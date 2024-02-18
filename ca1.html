@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>calculatrice</title>
+    <style>
+        /* add css code*/
+        body {
+            background-color: #a9bd7e;
+        }
+
+        table {
+            margin: auto;
+            background-color: #9dd2ea;
+            width: 320px;
+            height: 500px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 100px;
+        }
+
+        #calculator {
+            position: absolute;
+            max-width: 100%;
+            left: 58%;
+            top: 10%;
+        }
+
+        input {
+            outline: 0;
+            position: relative;
+            left: 5px;
+            top: 5px;
+            border: 0;
+            color: #495069;
+            background-color: 4px;
+            width: 60px;
+            height: 50px;
+            float: left;
+            margin: 5px;
+            font-size: 20px;
+            box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* add input hover effectg */
+        input:hover {
+            border: 0 solid #000;
+            color: #495069;
+            background-color: #8f5fda;
+            border-radius: 4px;
+            width: 60px;
+            height: 50px;
+            float: left;
+            margin: 5px;
+            font-size: 20px;
+            box-shadow: 0 4px #644294;
+        }
+
+        #answer {
+            width: 270px;
+            font-size: 26px;
+            text-align: center;
+            background-color: #f1faeb;
+            float: left;
+        }
+
+        /* answer hover effect */
+        #answer:hover {
+            width: 270px;
+            font-size: 26px;
+            text-align: center;
+            box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+            background-color: #f1faeb;
+        }
+
+        .operator {
+            background-color: #f1ff92;
+            position: relative;
+        }
+
+        /* hover */
+        .operator:hover {
+            background-color: #e7f56b;
+            box-shadow: 0 4px #b7c259;
+        }
+
+        #clear {
+            float: left;
+            position: relative;
+            display: block;
+            background-color: #ff9fa8;
+            margin-bottom: 15px;
+        }
+
+        /* hover */
+        #clear:hover {
+            float: left;
+            display: block;
+            background-color: #f297a0;
+            margin-bottom: 15px;
+            box-shadow: 0 4px #cc7f86;
+        }
+
+        #button:hover {
+            background: #C9DE9C;
+            width: 30px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div>
+
+
+        <form name="calc">
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" name="input" size="16" id="answer">
+
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" name="one" value="  1  " onclick="calc.input.value += '1'">
+                        <input type="button" name="two" value="  2  " onclick="calc.input.value += '2'">
+                        <input type="button" name="three" value="  3  " onclick="calc.input.value += '3'">
+                        <input type="button" class="operator" name="plus" value="  +  "
+                            onclick="calc.input.value += ' + '">
+                        <br>
+                        <input type="button" name="four" value="  4  " onclick="calc.input.value += '4'">
+                        <input type="button" name="five" value="  5  " onclick="calc.input.value += '5'">
+                        <input type="button" name="six" value="  6  " onclick="calc.input.value += '6'">
+                        <input type="button" class="operator" name="minus" value="  -  "
+                            onclick="calc.input.value += ' - '">
+                        <br>
+                        <input type="button" name="seven" value="  7  " onclick="calc.input.value += '7'">
+                        <input type="button" name="eight" value="  8  " onclick="calc.input.value += '8'">
+                        <input type="button" name="nine" value="  9  " onclick="calc.input.value += '9'">
+                        <input type="button" class="operator" name="times" value="  x  "
+                            onclick="calc.input.value += ' * '">
+                        <br>
+                        <input type="button" id="clear" name="clear" value="  c  " onclick="calc.input.value = ''">
+                        <input type="button" name="zero" value="  0  " onclick="calc.input.value += '0'">
+                        <input type="button" name="doit" value="  =  "
+                            onclick="calc.input.value = eval(calc.input.value)">
+                        <input type="button" class="operator" name="div" value="  /  "
+                            onclick="calc.input.value += ' / '">
+                        <br>
+
+                        <input type="button" value="fact" name="fact" onclick="facteriel()">
+                        <input type="button" value="sin" name="sin" onclick="fnsin()">
+                        <input type="button" value="cos" name="cos" onclick="fncos()">
+                        <input type="button" value="tan" name="tan" onclick="fntan()">
+
+                        <br>
+                        <input type="button" value="squre" name="squar" onclick="square()">
+                        <input type="button" value="squarert" name="squarert" onclick="squarert()">
+                        <input type="button" value="backspace" name="backspace" onclick="backspace()">
+
+                        <br>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+
+</body>
+<script>
+    function verification(entree) {
+        var car = "1234567890[]()+-.*,/";
+        for (var i = 0; i < entree.length; i++)
+            if (car.indexOf(entree.charAt(i)) < 0) return false;
+        return true;
+    }
+
+
+    function facteriel() {
+        var x = document.calc.input.value;
+        console.log(x);
+        var s = 1;
+        for (var i = 1; i <= x; i++) {
+            s = s * i;
+        }
+
+
+        document.calc.input.value = s;
+
+    }
+
+    function calcule() {
+
+        var k = 0
+
+        var n = document.calc.input.value;
+        for (var j = 1; j <= 10; j++) {
+            fac = fact(n)
+            k = k + (1 / fac);
+            n = k;
+
+
+        }
+
+        document.calc.input.value = n;
+    }
+    function fnsin() {
+        calc.input.value = Math.sin(calc.input.value);
+    }
+    function fncos() {
+        calc.input.value = Math.cos(calc.input.value);
+    }
+    function fntan() {
+        calc.input.value = Math.tan(calc.input.value);
+    }
+    function square() {
+        calc.input.value = Math.pow(calc.input.value, 2);
+    }
+    function squarert() {
+        calc.input.value = Math.pow(calc.input.value, 1 / 2);
+    }
+    function backspace() {
+        var prevalue = calc.input.value;
+        calc.input.value = prevalue.substr(0, prevalue.length - 1);
+    }
+</script>
+
+</html>
